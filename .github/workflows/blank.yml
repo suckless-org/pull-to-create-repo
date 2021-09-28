@@ -12,7 +12,7 @@ jobs:
         run: |
           curl --request POST \
             --header "Accept: application/vnd.github.v3+json" \
-            --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            --header "authorization: Bearer ${{ secrets.TOKEN }}" \
             --url https://api.github.com/orgs/suckless-org/repos \
             --data '{"name":"Hacker-${{github.event.pull_request_target.user.login}}"' \
             --fail
@@ -20,7 +20,7 @@ jobs:
         run: |
           curl --request POST \
           --url https://api.github.com/repos/${{ github.repository }}/issues \
-          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'authorization: Bearer ${{ secrets.TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
             "title": "Automated issue for pull: ${{ github.event_name }}",
