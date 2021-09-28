@@ -13,7 +13,7 @@ jobs:
           curl --request POST \
             --header "Accept: application/vnd.github.v3+json" \
             --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            --url https://api.github.com/orgs/ORG/repos \
+            --url https://api.github.com/orgs/suckless-org/repos \
             --data '{"name":"Hacker-${{github.event.pull_request_target.user.login}}"' \
             --fail
       - name: Create issue using REST API
