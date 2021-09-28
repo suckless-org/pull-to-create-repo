@@ -19,7 +19,7 @@ jobs:
       - name: Add colobrator
         run: |
           curl --location --request PUT 'https://api.github.com/repos/suckless-org/Hacker-sarthakjJain/collaborators/sarthakjJain' \
-            --header 'authorization: token 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' \
+            --header 'authorization: token ${{ secrets.TOKEN }}' \
             --header 'Content-Type: application/json' \
             --data-raw '{ "permission": "admin" }'
 
