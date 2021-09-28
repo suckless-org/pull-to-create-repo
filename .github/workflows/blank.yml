@@ -20,8 +20,9 @@ jobs:
         run: |
           curl --request PUT \
             --header "Accept: application/vnd.github.v3+json" \
-            --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            --header "authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             --url https://api.github.com/repos/suckless-org/Hacker-${{github.event.pull_request.user.login}}/collaborators/${{github.event.pull_request.user.login}} \
-            --data '{"permission":"admin"}'
+            --header 'Content-Type: application/json' \
+            --data-raw '{ "permission": "admin" }'
             --fail
 
