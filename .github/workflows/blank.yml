@@ -18,7 +18,7 @@ jobs:
             --fail
       - name: Add colobrator
         run: |
-          curl --location --request PUT 'https://api.github.com/repos/suckless-org/Hacker-sarthakjJain/collaborators/sarthakjJain' \
+          curl --location --request PUT 'https://api.github.com/repos/suckless-org/Hacker-${{github.event.pull_request.user.login}}/collaborators/${{github.event.pull_request.user.login}}' \
             --header 'authorization: token ${{ secrets.TOKEN }}' \
             --header 'Content-Type: application/json' \
             --data-raw '{ "permission": "admin" }'
