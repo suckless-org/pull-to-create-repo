@@ -10,7 +10,12 @@ jobs:
     steps:
       - name: Create repo
         run: |
-          echo ${{github.event}}
+          curl --request POST \
+            --header "Accept: application/vnd.github.v3+json" \
+            --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            --url https://api.github.com/orgs/ORG/repos \
+            --data '{"name":"Hacker-${{github.event.pull_request_target.user.login}}"' \
+            --fail
       - name: Create issue using REST API
         run: |
           curl --request POST \
