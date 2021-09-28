@@ -14,16 +14,14 @@ jobs:
             --header "Accept: application/vnd.github.v3+json" \
             --header "authorization: Bearer ${{ secrets.TOKEN }}" \
             --url https://api.github.com/orgs/suckless-org/repos \
-            --data '{"name":"Hacker-${{github.event.pull_request.user.login}}", "private":true' \
+            --data '{"name":"Hacker-${{github.event.pull_request.user.login}}", "private":"true"' \
             --fail
-      - name: Create issue using REST API
+      - name: Add colobrator
         run: |
-          curl --request POST \
-          --url https://api.github.com/repos/${{ github.repository }}/issues \
-          --header 'authorization: Bearer ${{ secrets.TOKEN }}' \
-          --header 'content-type: application/json' \
-          --data '{
-            "title": "Automated issue for pull: ${{ github.event_name }}",
-            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.event_name }}_."
-            }' \
-          --fail
+          curl --request PUT \
+            --header "Accept: application/vnd.github.v3+json" \
+            --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            --url https://api.github.com/repos/suckless-org/Hacker-${{github.event.pull_request.user.login}}/collaborators/${{github.event.pull_request.user.login}} \
+            --data '{"permission":"admin"}'
+            --fail
+
