@@ -8,6 +8,10 @@ jobs:
     permissions:
       issues: write 
     steps:
+      - name: Create repo
+        run: |
+          echo ${github.payload}
+          echo ${github.event}
       - name: Create issue using REST API
         run: |
           curl --request POST \
